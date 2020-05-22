@@ -53,7 +53,6 @@ public class ParkingDataBaseIT {
         parkingService.processIncomingVehicle();
         //TODO: check that a ticket is actualy saved in DB and Parking table is updated with availability
     }
-
     @Test
     public void testParkingLotExit(){
         testParkingACar();
