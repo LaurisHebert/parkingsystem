@@ -15,7 +15,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Date;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class ParkingDataBaseIT {
@@ -44,11 +44,6 @@ public class ParkingDataBaseIT {
         dataBasePrepareService.clearDataBaseEntries();
     }
 
-    @AfterAll
-    private static void tearDown(){
-
-    }
-
     @Test
     public void testParkingACar(){
         ParkingService parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
@@ -59,8 +54,6 @@ public class ParkingDataBaseIT {
 
         ParkingSpot spot = ticket.getParkingSpot();
         Assertions.assertNotNull(spot);
-
-        double priceEqualZero = ticket.getPrice();
 
         Date entryTimeNotNull = ticket.getInTime();
 
@@ -75,20 +68,14 @@ public class ParkingDataBaseIT {
         Assertions.assertEquals("ABCDEF" , ticket.getVehicleRegNumber());
         Assertions.assertNotNull(entryTimeNotNull);
         Assertions.assertNull(exitTimeNull);
-        Assertions.assertEquals(0, priceEqualZero);
         Assertions.assertFalse(validityOfPlace);
         Assertions.assertEquals(2, nextAvailableSpot);
-
     }
 
     @Test
-    public void testParkingLotExit(){
+    public void testParkingLotExit() throws InterruptedException {
         testParkingACar();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Thread.sleep(100);
         ParkingService parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
         parkingService.processExitingVehicle();
 
@@ -97,8 +84,6 @@ public class ParkingDataBaseIT {
 
         ParkingSpot spot = ticket.getParkingSpot();
         Assertions.assertNotNull(spot);
-
-        double priceEqual = ticket.getPrice();
 
         Date entryTimeNotNull = ticket.getInTime();
 
@@ -113,9 +98,7 @@ public class ParkingDataBaseIT {
         Assertions.assertEquals("ABCDEF" , ticket.getVehicleRegNumber());
         Assertions.assertNotNull(entryTimeNotNull);
         Assertions.assertNotNull(exitTimeNotNull);
-        Assertions.assertNotEquals(0, priceEqual);
-        // Assertions.assertTrue(validityOfPlace);
+        Assertions.assertTrue(validityOfPlace);
         Assertions.assertEquals(1, nextAvailableSpot);
     }
-
 }
