@@ -15,8 +15,11 @@ create table ticket(
  PRICE double,
  IN_TIME DATETIME NOT NULL,
  OUT_TIME DATETIME,
+ DISCOUNT int DEFAULT 0,
+
  FOREIGN KEY (PARKING_NUMBER)
- REFERENCES parking(PARKING_NUMBER));
+ REFERENCES parking(PARKING_NUMBER)
+);
 
 insert into parking(PARKING_NUMBER,AVAILABLE,TYPE) values(1,true,'CAR');
 insert into parking(PARKING_NUMBER,AVAILABLE,TYPE) values(2,true,'CAR');
@@ -42,8 +45,11 @@ create table ticket(
  PRICE double,
  IN_TIME DATETIME NOT NULL,
  OUT_TIME DATETIME,
+ DISCOUNT int DEFAULT 0,
+
  FOREIGN KEY (PARKING_NUMBER)
- REFERENCES parking(PARKING_NUMBER));
+ REFERENCES parking(PARKING_NUMBER)
+ );
 
 insert into parking(PARKING_NUMBER,AVAILABLE,TYPE) values(1,true,'CAR');
 insert into parking(PARKING_NUMBER,AVAILABLE,TYPE) values(2,true,'CAR');
