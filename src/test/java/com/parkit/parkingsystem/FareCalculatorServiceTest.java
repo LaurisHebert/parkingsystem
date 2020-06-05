@@ -44,7 +44,7 @@ public class FareCalculatorServiceTest {
     }
 
     @ParameterizedTest(name = "{0} minutes in parking for bike, price expected is {1}")
-    @CsvSource({ "60,1", "45,0.75", "1440,24", "30,0.5"})
+    @CsvSource({ "60,1", "45,0.75", "1440,24", "30,0.5", "25,0"})
     public void calculateFareBike(int timeLapsInMinute, double priceExpected){
         Date inTime = new Date();
         inTime.setTime( System.currentTimeMillis() - (timeLapsInMinute * 60 * 1000) );
@@ -58,7 +58,7 @@ public class FareCalculatorServiceTest {
         assertEquals(priceExpected, ticket.getPrice());
     }
     @ParameterizedTest(name = "{0} minutes in parking for bike, price expected is {1}")
-    @CsvSource({ "60,1.50", "45,1.125", "1440,36.0", "30,0.75"})
+    @CsvSource({ "60,1.50", "45,1.125", "1440,36.0", "30,0.75", "25,0"})
     public void calculateFareCar(int timeLapsInMinute, double priceExpected){
         Date inTime = new Date();
         inTime.setTime( System.currentTimeMillis() - (timeLapsInMinute * 60 * 1000) );
