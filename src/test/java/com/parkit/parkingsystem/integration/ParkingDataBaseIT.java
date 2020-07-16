@@ -87,8 +87,6 @@ public class ParkingDataBaseIT {
 
         Date entryTimeNotNull = ticket.getInTime();
 
-        Date exitTimeNotNull = ticket.getOutTime();
-
         boolean validityOfPlace = spot.isAvailable();
 
         int nextAvailableSpot = parkingSpotDAO.getNextAvailableSlot(ParkingType.CAR);
@@ -97,7 +95,6 @@ public class ParkingDataBaseIT {
         Assertions.assertEquals(ParkingType.CAR, spot.getParkingType());
         Assertions.assertEquals("ABCDEF" , ticket.getVehicleRegNumber());
         Assertions.assertNotNull(entryTimeNotNull);
-        Assertions.assertNotNull(exitTimeNotNull);
         Assertions.assertTrue(validityOfPlace);
         Assertions.assertEquals(1, nextAvailableSpot);
     }
